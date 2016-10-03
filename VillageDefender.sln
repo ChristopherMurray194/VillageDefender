@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2015
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VillageDefender.CSharp.Plugins", "VillageDefender.CSharp.Plugins.csproj", "{9B316AF7-46B4-F093-6D64-F30FF4E15317}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VillageDefender.CSharp", "VillageDefender.CSharp.csproj", "{0C9F7D74-327A-D156-8E15-DD3631EF5AFB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9B316AF7-46B4-F093-6D64-F30FF4E15317}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9B316AF7-46B4-F093-6D64-F30FF4E15317}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9B316AF7-46B4-F093-6D64-F30FF4E15317}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9B316AF7-46B4-F093-6D64-F30FF4E15317}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0C9F7D74-327A-D156-8E15-DD3631EF5AFB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C9F7D74-327A-D156-8E15-DD3631EF5AFB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0C9F7D74-327A-D156-8E15-DD3631EF5AFB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0C9F7D74-327A-D156-8E15-DD3631EF5AFB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
