@@ -12,6 +12,7 @@ public class EnemyHealth : MonoBehaviour
     Animator anim;
     AudioSource enemyAudio;
     ParticleSystem bloodParticles;
+    Blood bloodScript;
     CapsuleCollider capsuleCollider;
     bool isDead;
     bool isSinking;
@@ -21,6 +22,7 @@ public class EnemyHealth : MonoBehaviour
         anim = GetComponent<Animator>();
         enemyAudio = GetComponent<AudioSource>();
         bloodParticles = GetComponentInChildren<ParticleSystem>();
+        bloodScript = bloodParticles.GetComponent<Blood>();
         capsuleCollider = GetComponent<CapsuleCollider>();
 
         currentHealth = startingHealth;
@@ -43,13 +45,14 @@ public class EnemyHealth : MonoBehaviour
 
         // Play the blood particle spurt effect
         bloodParticles.transform.position = hitPoint;
+        bloodScript.SetSpurt(true);
         bloodParticles.Play();
 
         if (currentHealth <= 0)
-            Death();
+            Death(hitPoint);
     }
 
-    void Death()
+    void Death(Vector3 hitPoint)
     {
         isDead = true;
 
@@ -60,6 +63,11 @@ public class EnemyHealth : MonoBehaviour
 
         enemyAudio.clip = deathClip;
         enemyAudio.Play();
+
+        // Play the blood particle spray effect
+        bloodParticles.transform.position = hitPoint;
+        bloodScript.SetSpray(true);
+        bloodParticles.Play();
     }
 
     public void StartSinking()
