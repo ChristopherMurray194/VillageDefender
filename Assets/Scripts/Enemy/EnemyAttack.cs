@@ -68,8 +68,19 @@ public class EnemyAttack : MonoBehaviour
         {
             // We are in range of the character so we know we can attack
             anim.SetBool("bInRange", bInRange);    // Allow transition to the attacking animation
-            // Apply damage
-            playerHealth.TakeDamage(attackDamage);
         }
+    }
+
+    /**
+     * This function will be called when the AttackFinished Event occurs on the Attack animation.
+     */
+    public void AttackFinished()
+    {
+        /* Apply damage ONLY when the enemy's sword hits the player.
+        * If this is called in Attack then damage would be applied continously whilst in range of the player,
+        * given that the enemy's attack is visually slow, there is a mismatch if the player is damaged multiple times
+        * whilst the enemy attack animation is playing.
+        */
+        playerHealth.TakeDamage(attackDamage);
     }
 }
