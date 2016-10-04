@@ -10,7 +10,7 @@ public class EnemyAttack : MonoBehaviour
     GameObject player;
     PlayerHealth playerHealth;  // Reference to PlayerHealth script
     EnemyMovement enemyMovement;
-    //EnemyHealth enemyHealth;
+    EnemyHealth enemyHealth;
     bool bInRange;              // EnemyAC trigger
     float timer;
 
@@ -19,7 +19,7 @@ public class EnemyAttack : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         playerHealth = player.GetComponent<PlayerHealth>();
         enemyMovement = GetComponent<EnemyMovement>();
-        //enemyHealth = GetComponent<EnemyHealth>();
+        enemyHealth = GetComponent<EnemyHealth>();
         anim = GetComponent<Animator>();
     }
 
@@ -44,7 +44,7 @@ public class EnemyAttack : MonoBehaviour
     {
         timer += Time.deltaTime;
 
-        if(timer >= timeBetweenAttacks && bInRange/* && enemyHealth.currentHealth > 0*/)
+        if(timer >= timeBetweenAttacks && bInRange && enemyHealth.currentHealth > 0)
         {
             Attack();
         }
