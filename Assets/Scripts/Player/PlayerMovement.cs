@@ -3,7 +3,8 @@ using System.Collections;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public float speed = 6f;
+    public float speed = 6f;    // Speed of movement
+    public float rotSpeed = 4f; // Speed of Slerp
 
     Vector3 movement;           // Store the movement direction
     Animator anim;              // Reference to animator component
@@ -40,11 +41,11 @@ public class PlayerMovement : MonoBehaviour
 
     void Turning()
     {
+        /*
+        // Rotation determined by the mouse position
         // Cast a ray from the main camera to the mouse position
         Ray camRay = Camera.main.ScreenPointToRay(Input.mousePosition);
-
         RaycastHit floorHit;
-
         // If the raycast hits something...(also get information about what was hit)
         if(Physics.Raycast(camRay, out floorHit, camRayLength, floorMask))
         {
@@ -54,7 +55,12 @@ public class PlayerMovement : MonoBehaviour
 
             Quaternion newRotation = Quaternion.LookRotation(playerToMouse);
             playerRigidBody.MoveRotation(newRotation);
-        }
+        }*/
+
+        // The rotation in the direction determined by key events
+        Vector3 slerpDirection = Vector3.Slerp(transform.forward, movement, rotSpeed * Time.deltaTime);
+        Quaternion keyRotation = Quaternion.LookRotation(slerpDirection);
+        playerRigidBody.MoveRotation(keyRotation);
     }
 
     void Animating(float h, float v)
