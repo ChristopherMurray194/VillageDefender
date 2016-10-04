@@ -26,7 +26,7 @@ public class PlayerMovement : MonoBehaviour
         float v = Input.GetAxisRaw("Vertical");     // Maps to the W and S keys
 
         Move(h, v);
-        Turning();
+        Turning(h, v);
         Animating(h, v);
     }
 
@@ -39,28 +39,33 @@ public class PlayerMovement : MonoBehaviour
         playerRigidBody.MovePosition(transform.position + movement);
     }
 
-    void Turning()
+    void Turning(float h, float v)
     {
-        /*
-        // Rotation determined by the mouse position
-        // Cast a ray from the main camera to the mouse position
-        Ray camRay = Camera.main.ScreenPointToRay(Input.mousePosition);
-        RaycastHit floorHit;
-        // If the raycast hits something...(also get information about what was hit)
-        if(Physics.Raycast(camRay, out floorHit, camRayLength, floorMask))
+        // If there is no horizontal OR vertical axis input - i.e. not moving
+        if (h == 0f && v == 0f)
         {
-            // Vector from player's position to the position of the mouse
-            Vector3 playerToMouse = floorHit.point - transform.position;
-            playerToMouse.y = 0f;
+            // Rotation determined by the mouse position
+            // Cast a ray from the main camera to the mouse position
+            Ray camRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit floorHit;
+            // If the raycast hits something...(also get information about what was hit)
+            if (Physics.Raycast(camRay, out floorHit, camRayLength, floorMask))
+            {
+                // Vector from player's position to the position of the mouse
+                Vector3 playerToMouse = floorHit.point - transform.position;
+                playerToMouse.y = 0f;
 
-            Quaternion newRotation = Quaternion.LookRotation(playerToMouse);
-            playerRigidBody.MoveRotation(newRotation);
-        }*/
-
-        // The rotation in the direction determined by key events
-        Vector3 slerpDirection = Vector3.Slerp(transform.forward, movement, rotSpeed * Time.deltaTime);
-        Quaternion keyRotation = Quaternion.LookRotation(slerpDirection);
-        playerRigidBody.MoveRotation(keyRotation);
+                Quaternion newRotation = Quaternion.LookRotation(playerToMouse);
+                playerRigidBody.MoveRotation(newRotation);
+            }
+        }
+        else
+        {
+            // The rotation in the direction determined by key events
+            Vector3 slerpDirection = Vector3.Slerp(transform.forward, movement, rotSpeed * Time.deltaTime);
+            Quaternion keyRotation = Quaternion.LookRotation(slerpDirection);
+            playerRigidBody.MoveRotation(keyRotation);
+        }
     }
 
     void Animating(float h, float v)
