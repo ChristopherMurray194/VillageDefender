@@ -54,17 +54,18 @@ public class PlayerMovement : MonoBehaviour
                 // Vector from player's position to the position of the mouse
                 Vector3 playerToMouse = floorHit.point - transform.position;
                 playerToMouse.y = 0f;
-
-                Quaternion newRotation = Quaternion.LookRotation(playerToMouse);
+                Vector3 slerpDirection = Vector3.Slerp(transform.forward, playerToMouse, ((int)rotSpeed << 1) * Time.deltaTime);
+                
+                Quaternion newRotation = Quaternion.LookRotation(slerpDirection);
                 playerRigidBody.MoveRotation(newRotation);
             }
         }
         else
         {
-            // The rotation in the direction determined by key events
+            // The rotation in the direction determined by key events, apply spherical interpolation
             Vector3 slerpDirection = Vector3.Slerp(transform.forward, movement, rotSpeed * Time.deltaTime);
-            Quaternion keyRotation = Quaternion.LookRotation(slerpDirection);
-            playerRigidBody.MoveRotation(keyRotation);
+            Quaternion newRotation = Quaternion.LookRotation(slerpDirection);
+            playerRigidBody.MoveRotation(newRotation);
         }
     }
 
