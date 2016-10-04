@@ -75,7 +75,8 @@
     <Compile Include="Assets\Footman\Script\MaterialChange.cs" />
     <Compile Include="Assets\Footman\Script\playerControl.cs" />
     <Compile Include="Assets\MedievalTownExteriors\Scripts\ProtectCameraFromWallClip.cs" />
-    <Compile Include="Assets\Scripts\PlayerMovement.cs" />
+    <Compile Include="Assets\Scripts\Camera\CameraFollow.cs" />
+    <Compile Include="Assets\Scripts\Player\PlayerMovement.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\EpicMusic\the combat collection.txt" />
