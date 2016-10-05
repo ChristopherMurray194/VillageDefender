@@ -43,6 +43,9 @@ public class EnemyHealth : MonoBehaviour
         enemyAudio.Play();
         currentHealth -= amount;
 
+        // Play the damage taken animation
+        anim.SetBool("bDamageTaken", true);
+
         // Play the blood particle spurt effect
         bloodScript.SetSpurt(true);
         bloodParticles.Play();
@@ -78,5 +81,11 @@ public class EnemyHealth : MonoBehaviour
         //ScoreManager.score += scoreValue;
         // Destroy the enemy gameobject
         Destroy(gameObject, 2f);
+    }
+
+    public void ResetDamageTaken()
+    {
+        // Reset the bDamageTaken EnemyAC parameter at the end of the damage animation
+        anim.SetBool("bDamageTaken", false);
     }
 }
