@@ -5,7 +5,7 @@ public class EnemyHealth : MonoBehaviour
 {
     public int startingHealth = 100;
     public int currentHealth;
-    public float sinkSpeed = 2.5f;
+    public float sinkSpeed = 1f;
     public int scoreValue = 10;
     public AudioClip deathClip;
 
@@ -44,7 +44,6 @@ public class EnemyHealth : MonoBehaviour
         currentHealth -= amount;
 
         // Play the blood particle spurt effect
-        bloodParticles.transform.position = hitPoint;
         bloodScript.SetSpurt(true);
         bloodParticles.Play();
 
@@ -65,7 +64,6 @@ public class EnemyHealth : MonoBehaviour
         enemyAudio.Play();
 
         // Play the blood particle spray effect
-        bloodParticles.transform.position = hitPoint;
         bloodScript.SetSpray(true);
         bloodParticles.Play();
     }
