@@ -7,27 +7,37 @@ public class PlayerAttack : MonoBehaviour
     public float throwRange = 10f;
 
     Animator anim;
-    GameObject enemy;
-    EnemyHealth enemyHealth;
+    ArrayList enemies;  // The list of enemies in range of the player
     bool bEnemyInRange;
 
     void Awake()
     {
-        GameObject enemy = GameObject.FindGameObjectWithTag("Enemy");
-        enemyHealth = enemy.GetComponent<EnemyHealth>();
+        enemies = new ArrayList();
         anim = GetComponent<Animator>();
     }
 
     void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Enemy")
+        {
+            // Check the enemy isn't already a member of the array list.
+            // Was having an issue where object would be added twice.
+            if(!enemies.Contains(other.gameObject))
+                // Add the enemy to the list of enemies
+                enemies.Add(other.gameObject);
+            
             bEnemyInRange = true;
+        }
     }
 
     void OnTriggerExit(Collider other)
     {
-        if(other.tag == "Enemy")
+        if (other.tag == "Enemy")
+        {
+            // Remove the enemy from the enemies list
+            enemies.Remove(other.gameObject);
             bEnemyInRange = false;
+        }
     }
 
     void Update()
@@ -52,7 +62,7 @@ public class PlayerAttack : MonoBehaviour
         // Only apply damage to the enemy if the enemy is in range of the attack
         if (bEnemyInRange)
         {
-            enemyHealth.TakeDamage(attackDamage);
+            //enemyHealth.TakeDamage(attackDamage);
         }
         // Stop the attack animation from looping
         anim.SetBool("Attack", false);
