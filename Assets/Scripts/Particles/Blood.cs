@@ -16,7 +16,7 @@ public class Blood : MonoBehaviour
         // Ensure default is spurt
         Spurt();
     }
-
+    
     void Update()
     {
         if (bSpray)
