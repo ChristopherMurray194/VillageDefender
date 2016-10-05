@@ -19,6 +19,7 @@ public class PlayerAttack : MonoBehaviour
         anim = GetComponent<Animator>();
     }
 
+    // Called almost every frame
     void OnTriggerStay(Collider other)
     {
         if (other.tag == "Enemy")
@@ -43,16 +44,27 @@ public class PlayerAttack : MonoBehaviour
         {
             Attack();
         }
+        Block();
+
         SetAttackOnMovement();
         GetFacing();
-        
-        Debug.Log(bEnemyInRange);
     }
 
     void Attack()
     {
         // Play the attack animation
         anim.SetBool("Attack", true);
+    }
+
+    void Block()
+    {
+        // If the B key is pressed
+        if (Input.GetKeyDown(KeyCode.B))
+            anim.SetBool("Block", true);
+
+        // If the B key is released
+        if (Input.GetKeyUp(KeyCode.B))
+            anim.SetBool("Block", false);
     }
 
     /**

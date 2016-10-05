@@ -43,17 +43,21 @@ public class PlayerHealth : MonoBehaviour
 
     public void TakeDamage(int amount)
     {
-        damaged = true;
-        currentHealth -= amount;
+        // If the player is not blocking, they can take damage
+        if (!anim.GetBool("Block"))
+        {
+            damaged = true;
+            currentHealth -= amount;
 
-        // Change the slider value accordingly
-        healthSlider.value = currentHealth;
-        // Play the hurt audio clip
-        playerAudio.Play();
+            // Change the slider value accordingly
+            healthSlider.value = currentHealth;
+            // Play the hurt audio clip
+            playerAudio.Play();
 
-        // Check if the player is dead
-        if (currentHealth <= 0 && !isDead)
-            Death();
+            // Check if the player is dead
+            if (currentHealth <= 0 && !isDead)
+                Death();
+        }
     }
 
     void Death()
