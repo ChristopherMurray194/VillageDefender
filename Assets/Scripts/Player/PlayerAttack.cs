@@ -19,10 +19,11 @@ public class PlayerAttack : MonoBehaviour
         anim = GetComponent<Animator>();
     }
 
-    void OnTriggerEnter(Collider other)
+    void OnTriggerStay(Collider other)
     {
         if (other.tag == "Enemy")
         {
+            // Ensures that if a enemy is within the collider, bEnemyRange remains true
             bEnemyInRange = true;
         }
     }
