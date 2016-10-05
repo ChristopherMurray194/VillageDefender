@@ -7,12 +7,15 @@ public class PlayerAttack : MonoBehaviour
     public float throwRange = 10f;
 
     Animator anim;
-    ArrayList enemies;  // The list of enemies in range of the player
+    Ray fwdRay;
+    RaycastHit objectHit;
+    int damageableMask;
+    EnemyHealth enemyHealth;
     bool bEnemyInRange;
 
     void Awake()
     {
-        enemies = new ArrayList();
+        damageableMask = LayerMask.GetMask("Damageable");
         anim = GetComponent<Animator>();
     }
 
@@ -20,12 +23,6 @@ public class PlayerAttack : MonoBehaviour
     {
         if (other.tag == "Enemy")
         {
-            // Check the enemy isn't already a member of the array list.
-            // Was having an issue where object would be added twice.
-            if(!enemies.Contains(other.gameObject))
-                // Add the enemy to the list of enemies
-                enemies.Add(other.gameObject);
-            
             bEnemyInRange = true;
         }
     }
@@ -34,8 +31,6 @@ public class PlayerAttack : MonoBehaviour
     {
         if (other.tag == "Enemy")
         {
-            // Remove the enemy from the enemies list
-            enemies.Remove(other.gameObject);
             bEnemyInRange = false;
         }
     }
@@ -48,7 +43,9 @@ public class PlayerAttack : MonoBehaviour
             Attack();
         }
         SetAttackOnMovement();
+        GetFacing();
         
+        Debug.Log(bEnemyInRange);
     }
 
     void Attack()
@@ -57,12 +54,30 @@ public class PlayerAttack : MonoBehaviour
         anim.SetBool("Attack", true);
     }
 
+    /**
+     * Cast a ray from the player's forward direction and get its health script
+     */
+    void GetFacing()
+    {
+        fwdRay.origin = transform.position + new Vector3(0f,.5f, 0f);     // The ray begins at the player's position
+        fwdRay.direction = transform.forward;   // Ray is in the direction the player is facing
+
+        // The length of the ray is the same as the radius of the player's spherecollider + its z offset.
+        // Unnecessary to have it any longer as we do not care about objects outside of the player's range.
+        SphereCollider sphereCollider = GetComponent<SphereCollider>();
+        float rayRange = sphereCollider.radius + 0.5f; // Push the ray slightly out of the radius range to detect the enemy a little earlier.
+        if (Physics.Raycast(fwdRay, out objectHit, rayRange, damageableMask))
+        {
+            enemyHealth = objectHit.collider.GetComponent<EnemyHealth>();
+        }
+    }
+
     public void AttackFinished()
     {
         // Only apply damage to the enemy if the enemy is in range of the attack
         if (bEnemyInRange)
         {
-            //enemyHealth.TakeDamage(attackDamage);
+            if (enemyHealth != null) enemyHealth.TakeDamage(attackDamage);
         }
         // Stop the attack animation from looping
         anim.SetBool("Attack", false);
