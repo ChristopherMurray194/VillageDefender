@@ -35,7 +35,7 @@ public class EnemyHealth : MonoBehaviour
             transform.Translate(-Vector3.up * sinkSpeed * Time.deltaTime);
     }
 
-    public void TakeDamage(int amount, Vector3 hitPoint)
+    public void TakeDamage(int amount)
     {
         if (isDead)
             return;
@@ -48,10 +48,10 @@ public class EnemyHealth : MonoBehaviour
         bloodParticles.Play();
 
         if (currentHealth <= 0)
-            Death(hitPoint);
+            Death();
     }
 
-    void Death(Vector3 hitPoint)
+    void Death()
     {
         isDead = true;
 
