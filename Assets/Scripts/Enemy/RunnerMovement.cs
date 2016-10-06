@@ -27,9 +27,9 @@ public class RunnerMovement : EnemyMovement
             // Create three feelers
             // TODO: These vector directions aren't quite right,
             //       to check uncomment Debug.DrawRay in the function.
-            CreateFeeler(transform.forward + new Vector3(-1f, 0f, 0f));
+            CreateFeeler(transform.forward + new Vector3(-.5f, 0f, 0f));
             CreateFeeler(transform.forward);
-            CreateFeeler(transform.forward + new Vector3(1f, 0f, 0f));
+            CreateFeeler(transform.forward + new Vector3(.5f, 0f, 0f));
         }
     }
 
@@ -45,7 +45,7 @@ public class RunnerMovement : EnemyMovement
         feeler.origin = transform.position;
         feeler.direction = rayDirection;
 
-        //Debug.DrawRay(feeler.origin + new Vector3(0f, 1f, 0f), feeler.direction * rayLength, Color.red, .1f);
+        Debug.DrawRay(feeler.origin + new Vector3(0f, 1f, 0f), feeler.direction * rayLength, Color.red, .1f);
 
         if(Physics.Raycast(feeler, out objectHit, rayLength))
         {
