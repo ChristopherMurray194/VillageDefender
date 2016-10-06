@@ -22,8 +22,15 @@ public class RunnerMovement : EnemyMovement
     {
         base.Update();
 
-        if(bCastRay)
-            CreateFeeler();
+        if (bCastRay)
+        {
+            // Create three feelers
+            // TODO: These vector directions aren't quite right,
+            //       to check uncomment Debug.DrawRay in the function.
+            CreateFeeler(transform.forward + new Vector3(-1f, 0f, 0f));
+            CreateFeeler(transform.forward);
+            CreateFeeler(transform.forward + new Vector3(1f, 0f, 0f));
+        }
     }
 
     /**
@@ -31,14 +38,15 @@ public class RunnerMovement : EnemyMovement
      * enough to run at them. Cannot use a sphere collider as there is a sphere collider component
      * acting as a trigger placed on the enemy object.
      */
-    void CreateFeeler()
+    void CreateFeeler(Vector3 rayDirection)
     {
         float rayLength = runDistance;
         RaycastHit objectHit;
         feeler.origin = transform.position;
-        feeler.direction = transform.forward;
+        feeler.direction = rayDirection;
 
-        Debug.DrawRay(feeler.origin + new Vector3(0f, 1f, 0f), feeler.direction * rayLength, Color.red, .1f);
+        //Debug.DrawRay(feeler.origin + new Vector3(0f, 1f, 0f), feeler.direction * rayLength, Color.red, .1f);
+
         if(Physics.Raycast(feeler, out objectHit, rayLength))
         {
             // If the ray hits the player
@@ -48,7 +56,7 @@ public class RunnerMovement : EnemyMovement
                 anim.SetBool("bRun", true);
                 // Change movement speed
                 nav.speed = runSpeed;
-                // No longer need to cast the ray
+                // No longer need to cast the ray(s)
                 bCastRay = false;
             }
         }
