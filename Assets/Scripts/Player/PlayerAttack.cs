@@ -40,31 +40,13 @@ public class PlayerAttack : MonoBehaviour
     void Update()
     {
         // If left mouse button pressed
-        if (Input.GetButton("Fire1"))
-        {
-            Attack();
-        }
-        Block();
+        if (Input.GetButton("Fire1")) anim.SetBool("Attack", true);
+        // If right mouse button pressed
+        if (Input.GetButton("Fire2")) anim.SetBool("Block", true);
+        if (Input.GetButtonUp("Fire2")) anim.SetBool("Block", false);
 
         SetAttackOnMovement();
         GetFacing();
-    }
-
-    void Attack()
-    {
-        // Play the attack animation
-        anim.SetBool("Attack", true);
-    }
-
-    void Block()
-    {
-        // If the B key is pressed
-        if (Input.GetKeyDown(KeyCode.B))
-            anim.SetBool("Block", true);
-
-        // If the B key is released
-        if (Input.GetKeyUp(KeyCode.B))
-            anim.SetBool("Block", false);
     }
 
     /**
