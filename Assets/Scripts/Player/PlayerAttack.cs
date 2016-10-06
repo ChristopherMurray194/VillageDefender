@@ -50,7 +50,8 @@ public class PlayerAttack : MonoBehaviour
     }
 
     /**
-     * Cast a ray from the player's forward direction and get its health script
+     * Cast a ray from the player's forward direction and get the health script of the enemy
+     * the player is facing
      */
     void GetFacing()
     {
