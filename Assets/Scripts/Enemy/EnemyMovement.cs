@@ -10,7 +10,7 @@ public class EnemyMovement : MonoBehaviour
     EnemyHealth enemyHealth;
     protected NavMeshAgent nav;         // Reference to the NavMeshAgent
     
-    protected void Awake()
+    protected virtual void Awake()
     {
         // Find the player's position
         player = GameObject.FindGameObjectWithTag("Player").transform;
@@ -20,7 +20,7 @@ public class EnemyMovement : MonoBehaviour
         nav.speed = movementSpeed;
     }
 
-    protected void Update()
+    protected virtual void Update()
     {
         if (enemyHealth.currentHealth > 0 && playerHealth.currentHealth > 0)
         {

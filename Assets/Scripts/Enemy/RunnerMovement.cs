@@ -11,14 +11,14 @@ public class RunnerMovement : EnemyMovement
     Animator anim;
     bool bCastRay = true;
 
-    new void Awake()
+    protected override void Awake()
     {
         base.Awake();
         initSpeed = movementSpeed;
         anim = GetComponent<Animator>();
     }
 
-    new void Update()
+    protected override void Update()
     {
         base.Update();
 
