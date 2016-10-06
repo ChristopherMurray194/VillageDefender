@@ -78,7 +78,7 @@ public class EnemyHealth : MonoBehaviour
         // Unity NavMesh ignores kinematic objects when updating
         GetComponent<Rigidbody>().isKinematic = true;
         isSinking = true;
-        //ScoreManager.score += scoreValue;
+        ScoreManager.score += scoreValue;
         // Destroy the enemy gameobject
         Destroy(gameObject, 2f);
     }
