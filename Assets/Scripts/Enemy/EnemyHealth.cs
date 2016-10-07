@@ -11,6 +11,7 @@ public class EnemyHealth : MonoBehaviour
 
     Animator anim;
     AudioSource enemyAudio;
+    HealthBar healthBar;
     ParticleSystem bloodParticles;
     Blood bloodScript;
     CapsuleCollider capsuleCollider;
@@ -21,6 +22,7 @@ public class EnemyHealth : MonoBehaviour
     {
         anim = GetComponent<Animator>();
         enemyAudio = GetComponent<AudioSource>();
+        healthBar = GetComponentInChildren<HealthBar>();
         bloodParticles = GetComponentInChildren<ParticleSystem>();
         bloodScript = bloodParticles.GetComponent<Blood>();
         capsuleCollider = GetComponent<CapsuleCollider>();
@@ -42,6 +44,8 @@ public class EnemyHealth : MonoBehaviour
 
         enemyAudio.Play();
         currentHealth -= amount;
+        // Change the health bar accordingly
+        healthBar.UpdateHealth(amount, startingHealth);
 
         // Play the damage taken animation
         anim.SetBool("bDamageTaken", true);
