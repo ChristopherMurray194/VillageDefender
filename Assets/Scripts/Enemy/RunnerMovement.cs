@@ -47,18 +47,14 @@ public class RunnerMovement : EnemyMovement
 
         //Debug.DrawRay(feeler.origin + new Vector3(0f, 1f, 0f), feeler.direction * rayLength, Color.red, .1f);
 
-        if(Physics.Raycast(feeler, out objectHit, rayLength))
+        if(Physics.Raycast(feeler, out objectHit, rayLength, LayerMask.GetMask("Player")))
         {
-            // If the ray hits the player
-            if (objectHit.collider.gameObject == player.gameObject)
-            {
                 // Start running animation
                 anim.SetBool("bRun", true);
                 // Change movement speed
                 nav.speed = runSpeed;
                 // No longer need to cast the ray(s)
                 bCastRay = false;
-            }
         }
     }
 
