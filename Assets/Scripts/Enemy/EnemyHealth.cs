@@ -79,6 +79,8 @@ public class EnemyHealth : MonoBehaviour
         GetComponent<Rigidbody>().isKinematic = true;
         isSinking = true;
         ScoreManager.score += scoreValue;
+        // Decrement the count of enemies in the level
+        --EnemyCountManager.enemyCount;
         // Destroy the enemy gameobject
         Destroy(gameObject, 2f);
     }

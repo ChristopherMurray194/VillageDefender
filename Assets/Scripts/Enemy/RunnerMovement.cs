@@ -45,7 +45,7 @@ public class RunnerMovement : EnemyMovement
         feeler.origin = transform.position;
         feeler.direction = rayDirection;
 
-        Debug.DrawRay(feeler.origin + new Vector3(0f, 1f, 0f), feeler.direction * rayLength, Color.red, .1f);
+        //Debug.DrawRay(feeler.origin + new Vector3(0f, 1f, 0f), feeler.direction * rayLength, Color.red, .1f);
 
         if(Physics.Raycast(feeler, out objectHit, rayLength))
         {

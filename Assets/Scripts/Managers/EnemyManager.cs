@@ -7,7 +7,7 @@ public class EnemyManager : MonoBehaviour
     public PlayerHealth playerHealth;
     public GameObject[] enemies;
     public float baseSpawnTime = 3f;    // Spawn time for the base enemy type
-    public float runnerSpawnTime = 6f;  // Spawn time for the runner enemy type
+    public float runnerSpawnTime = 10f;  // Spawn time for the runner enemy type
     public Transform[] spawnPoints;     // Array of spawn points
 
     int spawnCount; // Counts the number of enemies spawned
