@@ -6,7 +6,6 @@ public class RunnerMovement : EnemyMovement
     public float runSpeed = 4f;
     public float runDistance = 8f;  // The distance from the player the runner will start running
 
-    float initSpeed;
     Ray feeler;
     Animator anim;
     bool bCastRay = true;
@@ -14,7 +13,6 @@ public class RunnerMovement : EnemyMovement
     protected override void Awake()
     {
         base.Awake();
-        initSpeed = movementSpeed;
         anim = GetComponent<Animator>();
     }
 
