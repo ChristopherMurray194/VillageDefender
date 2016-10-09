@@ -31,7 +31,11 @@ public class HealthBar : MonoBehaviour
         float percentage = (float)damageValue / (float)startingHealth;
         // The amount to decrement the health bar by
         float decrementValue = scaleX * percentage;
-        // Change the scale of the health bar in the X axis only
-        transform.localScale -= new Vector3(decrementValue, 0f, 0f);
+
+        if (transform.localScale.x - decrementValue > 0)
+            // Changes the scale of the health bar in the X axis only
+            transform.localScale -= new Vector3(decrementValue, 0f, 0f);
+        else
+            transform.localScale = new Vector3(0f, 0f, 0f);
     }
 }
