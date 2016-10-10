@@ -17,3 +17,7 @@ Assets/FantasyMonster.meta
 Assets/Textures/Sprites/LiquidToonFree.meta
 Assets/Audio.meta
 Assets/Fonts.meta
+
+*.csproj
+*.sln
+.vs/**
