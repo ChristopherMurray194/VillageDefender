@@ -74,4 +74,6 @@ public class PlayerHealth : MonoBehaviour
         playerMovement.enabled = false;
         //playerAttacking.enabled = false;
     }
+
+    public bool GetIsDead() { return isDead; }
 }
