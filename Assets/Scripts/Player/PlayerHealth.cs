@@ -5,13 +5,13 @@ using System.Collections;
 public class PlayerHealth : MonoBehaviour
 {
     public int startingHealth = 100;
-    public int currentHealth;
     public Slider healthSlider;
     public Image damageImage;
     public AudioClip deathClip;
     public float flashSpeed = 5f;
     public Color flashColour = new Color(1f, 0f, 0f, 0.1f);
 
+    int currentHealth;
     Animator anim;
     AudioSource playerAudio;
     PlayerMovement playerMovement;  // Reference to PlayerMovement script
@@ -60,6 +60,20 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
+    public void RestoreHealth(int amount)
+    {    
+        currentHealth += amount;
+
+        // Change the slider value accordingly
+        healthSlider.value = currentHealth;
+
+        // TODO: Add some particle effect to make it clearer to the player
+        //       that some health has been restored
+
+        // TODO: Either play an audio clip here or just add it as a component to the
+        //       above particle effect. Latter would be better.
+    }
+
     void Death()
     {
         isDead = true;
@@ -76,4 +90,6 @@ public class PlayerHealth : MonoBehaviour
     }
 
     public bool GetIsDead() { return isDead; }
+    public int GetStartingHealth() { return startingHealth; }
+    public int GetCurrentHealth() { return currentHealth; }
 }

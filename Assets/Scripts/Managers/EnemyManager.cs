@@ -25,7 +25,7 @@ public class EnemyManager : MonoBehaviour
         if (spawnCount != enemyCount)
         {
             // If the player is dead, there is no need to continue spawning
-            if (playerHealth.currentHealth <= 0f)
+            if (playerHealth.GetCurrentHealth() <= 0f)
             {
                 return;
             }
@@ -44,7 +44,7 @@ public class EnemyManager : MonoBehaviour
         if (spawnCount != enemyCount)
         {
             // If the player is dead, there is no need to continue spawning
-            if (playerHealth.currentHealth <= 0f)
+            if (playerHealth.GetCurrentHealth() <= 0f)
             {
                 return;
             }

@@ -50,7 +50,7 @@ public class EnemyAttack : MonoBehaviour
         }
 
         // Check is player is dead
-        if (playerHealth.currentHealth <= 0)
+        if (playerHealth.GetCurrentHealth() <= 0)
         {
             anim.SetTrigger("PlayerDead");  // Set the EnemyAC trigger
             // Player is dead so stop the enemy moving by disabling the script
@@ -64,7 +64,7 @@ public class EnemyAttack : MonoBehaviour
         timer = 0f;
 
         // If the player stil has health
-        if(playerHealth.currentHealth > 0)
+        if(playerHealth.GetCurrentHealth() > 0)
         {
             // We are in range of the character so we know we can attack
             anim.SetBool("bInRange", bInRange);    // Allow transition to the attacking animation
