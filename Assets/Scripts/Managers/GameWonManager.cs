@@ -2,9 +2,8 @@
 using UnityEngine.SceneManagement;
 using System.Collections;
 
-public class GameOverManager : MonoBehaviour
+public class GameWonManager : MonoBehaviour
 {
-    public PlayerHealth playerHealth;
     public float restartDelay = 5f;
 
     Animator anim;
@@ -12,14 +11,14 @@ public class GameOverManager : MonoBehaviour
 
     void Awake()
     {
-        anim = GetComponent<Animator>();    
+        anim = GetComponent<Animator>();
     }
 
     void Update()
     {
-        if(playerHealth.GetIsDead())
+        if (EnemyCountManager.enemyCount <= 0)
         {
-            anim.SetTrigger("GameOver");
+            anim.SetTrigger("GameWon");
 
             restartTimer += Time.deltaTime;
 
