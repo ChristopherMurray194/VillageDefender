@@ -20,7 +20,15 @@ public class HealthPickup : BasePickup
             if (playerHealth.GetCurrentHealth() < playerHealth.GetStartingHealth())
             {
                 playerHealth.RestoreHealth(restoreAmount);
-                // Remove the health pickup from the scene
+                
+                GameObject healthPickupMgr = GameObject.Find("HealthPickupManager");
+                PickupManager pMgr = healthPickupMgr.GetComponent<PickupManager>();
+                // Spawn a new health pickup
+                pMgr.SpawnNew();
+                // Decrement number of pickups in the scene
+                pMgr.setPickupCount(pMgr.GetPickupCount()-1);
+
+                // Remove the current health pickup from the scene
                 GameObject.Destroy(gameObject);
             }
         }

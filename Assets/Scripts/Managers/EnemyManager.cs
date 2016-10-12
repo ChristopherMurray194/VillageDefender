@@ -62,5 +62,5 @@ public class EnemyManager : MonoBehaviour
         }
     }
 
-    int GetEnemyCount() { return enemies.Length; }
+    int GetSpawnCount() { return spawnCount; }
 }

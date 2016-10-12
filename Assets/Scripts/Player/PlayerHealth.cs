@@ -18,7 +18,7 @@ public class PlayerHealth : MonoBehaviour
     //PlayerAttaching playerAttacking;
     bool isDead;
     bool damaged;
-
+    
     void Awake()
     {
         anim = GetComponent<Animator>();
