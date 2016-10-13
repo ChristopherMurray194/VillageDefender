@@ -61,8 +61,13 @@ public class PlayerHealth : MonoBehaviour
     }
 
     public void RestoreHealth(int amount)
-    {    
-        currentHealth += amount;
+    {
+        // Ensure when health is restored it is not greater than,
+        // starting health.
+        if (currentHealth + amount <= currentHealth)
+            currentHealth += amount;
+        else // If it is, just give full health
+            currentHealth = startingHealth;
 
         // Change the slider value accordingly
         healthSlider.value = currentHealth;

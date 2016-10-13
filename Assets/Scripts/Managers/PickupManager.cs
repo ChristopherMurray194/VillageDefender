@@ -23,7 +23,7 @@ public class PickupManager : MonoBehaviour
 
     void SpawnPickup()
     {
-        if(pickupCount < pickupCap)
+        if (pickupCount < pickupCap)
         {
             int spawnPointIndex = Random.Range(0, spawnPoints.Length);
             Instantiate(pickup, spawnPoints[spawnPointIndex].position, pickup.transform.rotation);

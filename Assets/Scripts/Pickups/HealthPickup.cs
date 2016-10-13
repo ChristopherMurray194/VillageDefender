@@ -29,7 +29,7 @@ public class HealthPickup : BasePickup
                 pMgr.setPickupCount(pMgr.GetPickupCount()-1);
 
                 // Remove the current health pickup from the scene
-                GameObject.Destroy(gameObject);
+                Destroy(gameObject);
             }
         }
     }
