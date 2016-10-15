@@ -22,7 +22,7 @@ public class EnemyMovement : MonoBehaviour
 
     protected virtual void Update()
     {
-        if (enemyHealth.currentHealth > 0 && playerHealth.GetCurrentHealth() > 0)
+        if (enemyHealth.currentHealth > 0 && playerHealth.CurrentHealth > 0)
         {
             if(nav.enabled)
                 // Move to the player's position

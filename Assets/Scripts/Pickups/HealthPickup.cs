@@ -17,7 +17,7 @@ public class HealthPickup : BasePickup
         {
             PlayerHealth playerHealth = other.gameObject.GetComponent<PlayerHealth>();
             // Only restore health if damage has been taken
-            if (playerHealth.GetCurrentHealth() < playerHealth.GetStartingHealth())
+            if (playerHealth.CurrentHealth < playerHealth.StartingHealth)
             {
                 playerHealth.RestoreHealth(restoreAmount);
                 
@@ -26,7 +26,7 @@ public class HealthPickup : BasePickup
                 // Spawn a new health pickup
                 pMgr.SpawnNew();
                 // Decrement number of pickups in the scene
-                pMgr.setPickupCount(pMgr.GetPickupCount()-1);
+                pMgr.PickupCount = pMgr.PickupCount - 1;
 
                 base.OnTriggerEnter(other);
             }

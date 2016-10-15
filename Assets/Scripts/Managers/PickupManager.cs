@@ -8,7 +8,8 @@ public class PickupManager : MonoBehaviour
     public float pickupSpawnTime = 10f; // Time between spawns
     public Transform[] spawnPoints;
 
-    int pickupCount;    // Keep track of how many pickups are currently in the scene
+    int pickupCount;        // Keep track of how many pickups are currently in the scene
+    ArrayList inUseSpawns;  // List of spawns with a pickup spawned
 
     void Start()
     {
@@ -31,6 +32,15 @@ public class PickupManager : MonoBehaviour
         }
     }
 
-    public void setPickupCount(int value) { pickupCount = value; }
-    public int GetPickupCount() { return pickupCount; }
+    public int PickupCount
+    {
+        get
+        {
+            return pickupCount;
+        }
+        set
+        {
+            pickupCount = PickupCount;
+        }
+    }
 }

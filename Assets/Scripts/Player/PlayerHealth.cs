@@ -94,7 +94,7 @@ public class PlayerHealth : MonoBehaviour
         //playerAttacking.enabled = false;
     }
 
-    public bool GetIsDead() { return isDead; }
-    public int GetStartingHealth() { return startingHealth; }
-    public int GetCurrentHealth() { return currentHealth; }
+    public bool IsDead { get { return isDead; } }
+    public int StartingHealth { get { return startingHealth; } }
+    public int CurrentHealth { get { return currentHealth; } }
 }
