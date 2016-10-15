@@ -64,7 +64,7 @@ public class PlayerHealth : MonoBehaviour
     {
         // Ensure when health is restored it is not greater than,
         // starting health.
-        if (currentHealth + amount <= currentHealth)
+        if (currentHealth + amount <= startingHealth)
             currentHealth += amount;
         else // If it is, just give full health
             currentHealth = startingHealth;

@@ -11,7 +11,7 @@ public class HealthPickup : BasePickup
         base.Update();
     }
 
-    void OnTriggerEnter(Collider other)
+    protected override void OnTriggerEnter(Collider other)
     {
         if(other.CompareTag("Player"))
         {
@@ -28,8 +28,7 @@ public class HealthPickup : BasePickup
                 // Decrement number of pickups in the scene
                 pMgr.setPickupCount(pMgr.GetPickupCount()-1);
 
-                // Remove the current health pickup from the scene
-                Destroy(gameObject);
+                base.OnTriggerEnter(other);
             }
         }
     }

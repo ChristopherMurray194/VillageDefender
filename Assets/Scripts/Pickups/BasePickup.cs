@@ -8,4 +8,10 @@ public class BasePickup : MonoBehaviour
         // Rotate the pickup 90 degrees in the Y axis
         transform.Rotate(new Vector3(0f, 90f, 0f) * Time.deltaTime, Space.World);
     }
+
+    protected virtual void OnTriggerEnter(Collider other)
+    {
+        // Remove the current pickup from the scene
+        Destroy(gameObject);
+    }
 }
