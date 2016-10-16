@@ -11,6 +11,17 @@ public class HealthPickup : BasePickup
         base.Update();
     }
 
+    protected override void NotifyManager()
+    {
+        GameObject healthPickupMgr = GameObject.Find("HealthPickupManager");
+        PickupManager pMgr = healthPickupMgr.GetComponent<PickupManager>();
+        // Free up the spawn point this pickup instance was located at,
+        // so that a new health pickup can be spawned there.
+        pMgr.FreeSpawn(spawnIndex);
+        // Decrement number of pickups in the scene
+        pMgr.PickupCount = pMgr.PickupCount - 1;
+    }
+
     protected override void OnTriggerEnter(Collider other)
     {
         if(other.CompareTag("Player"))
@@ -20,6 +31,8 @@ public class HealthPickup : BasePickup
             if (playerHealth.CurrentHealth < playerHealth.StartingHealth)
             {
                 playerHealth.RestoreHealth(restoreAmount);
+
+                NotifyManager();
 
                 base.OnTriggerEnter(other);
             }

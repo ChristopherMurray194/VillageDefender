@@ -17,7 +17,7 @@ public class PickupManager : MonoBehaviour
         InvokeRepeating("SpawnPickup", pickupSpawnTime, pickupSpawnTime);
     }
 
-    public void SpawnNew(int index)
+    public void FreeSpawn(int index)
     {
         if (inUseSpawns.Contains(index))
             // Remove the index from the list, as it is now free for use

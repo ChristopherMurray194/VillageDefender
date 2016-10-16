@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class BasePickup : MonoBehaviour
+public abstract class BasePickup : MonoBehaviour
 {
     protected int spawnIndex = 5; // The index of the spawn this pickup is currently position at
     public int SpawnIndex
@@ -22,15 +22,14 @@ public class BasePickup : MonoBehaviour
         transform.Rotate(new Vector3(0f, 90f, 0f) * Time.deltaTime, Space.World);
     }
 
+    /*
+     * Ensure all derived classes (pickup types) notifies their respective manager,
+     * to free up their spawn point and decrement the number of pickups (of that type) in the scene.
+     */
+    protected abstract void NotifyManager();
+
     protected virtual void OnTriggerEnter(Collider other)
-    {
-        GameObject healthPickupMgr = GameObject.Find("HealthPickupManager");
-        PickupManager pMgr = healthPickupMgr.GetComponent<PickupManager>();
-        // Spawn a new pickup
-        pMgr.SpawnNew(spawnIndex);
-        // Decrement number of pickups in the scene
-        pMgr.PickupCount = pMgr.PickupCount - 1;
-        
+    {   
         // Remove the current pickup from the scene
         Destroy(gameObject);
     }
