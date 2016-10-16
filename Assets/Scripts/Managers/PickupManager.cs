@@ -8,27 +8,43 @@ public class PickupManager : MonoBehaviour
     public float pickupSpawnTime = 10f; // Time between spawns
     public Transform[] spawnPoints;
 
-    int pickupCount;        // Keep track of how many pickups are currently in the scene
-    ArrayList inUseSpawns;  // List of spawns with a pickup spawned
+    int pickupCount;                          // Keep track of how many pickups are currently in the scene
+    ArrayList inUseSpawns = new ArrayList();  // List of spawns with a pickup spawned
 
     void Start()
     {
         // Spawn an initial pickup
-        Invoke("SpawnPickup", pickupSpawnTime);
+        InvokeRepeating("SpawnPickup", pickupSpawnTime, pickupSpawnTime);
     }
 
-    public void SpawnNew()
+    public void SpawnNew(int index)
     {
-        Invoke("SpawnPickup", pickupSpawnTime);
+        if (inUseSpawns.Contains(index))
+            // Remove the index from the list, as it is now free for use
+            inUseSpawns.Remove(index);
     }
 
     void SpawnPickup()
     {
+        // Prevent stack overflow. If all the spawn points are in use...
+        if (inUseSpawns.Count == spawnPoints.Length)
+            return;
+
         if (pickupCount < pickupCap)
         {
             int spawnPointIndex = Random.Range(0, spawnPoints.Length);
-            Instantiate(pickup, spawnPoints[spawnPointIndex].position, pickup.transform.rotation);
-            ++pickupCount;
+            // Check the spawn is not currently in use
+            if (!inUseSpawns.Contains(spawnPointIndex))
+            {
+                GameObject pickupInstance;
+                pickupInstance = Instantiate(pickup, spawnPoints[spawnPointIndex].position, pickup.transform.rotation) as GameObject;
+                // Add the index to the in-use list
+                inUseSpawns.Add(spawnPointIndex);
+                // Give the index to the pickup object
+                pickupInstance.GetComponent<BasePickup>().SpawnIndex = spawnPointIndex;
+                ++pickupCount;
+            }
+            else SpawnPickup();
         }
     }
 
@@ -40,7 +56,7 @@ public class PickupManager : MonoBehaviour
         }
         set
         {
-            pickupCount = PickupCount;
+            pickupCount = value;
         }
     }
 }
