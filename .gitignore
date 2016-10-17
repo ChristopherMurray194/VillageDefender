@@ -10,6 +10,7 @@ Assets/Textures/Sprites/LiquidToonFree/**
 Assets/Audio/**
 Assets/Fonts/**
 Assets/MenuAssets/**
+Assets/NecromancerGUI/**
 
 Assets/MedievalTownExteriors.meta
 Assets/Footman.meta
@@ -19,6 +20,7 @@ Assets/Textures/Sprites/LiquidToonFree.meta
 Assets/Audio.meta
 Assets/Fonts.meta
 Assets/MenuAssets.meta
+Assets/NecromancerGUI.meta
 
 *.csproj
 *.sln
