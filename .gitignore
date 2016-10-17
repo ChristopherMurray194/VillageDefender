@@ -9,6 +9,7 @@ Assets/FantasyMonster/**
 Assets/Textures/Sprites/LiquidToonFree/**
 Assets/Audio/**
 Assets/Fonts/**
+Assets/MenuAssets/**
 
 Assets/MedievalTownExteriors.meta
 Assets/Footman.meta
@@ -17,6 +18,7 @@ Assets/FantasyMonster.meta
 Assets/Textures/Sprites/LiquidToonFree.meta
 Assets/Audio.meta
 Assets/Fonts.meta
+Assets/MenuAssets.meta
 
 *.csproj
 *.sln
