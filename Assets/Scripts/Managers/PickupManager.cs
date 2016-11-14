@@ -3,7 +3,7 @@ using System.Collections;
 
 public class PickupManager : MonoBehaviour
 {
-    public GameObject pickup;           // Pickup object
+    public GameObject[] pickups;        // Pickup objects
     public int pickupCap = 1;           // Maximum number of pickups in the scene
     public float pickupSpawnTime = 10f; // Time between spawns
     public Transform[] spawnPoints;
@@ -32,12 +32,16 @@ public class PickupManager : MonoBehaviour
 
         if (pickupCount < pickupCap)
         {
+            // Select a random spawn point
             int spawnPointIndex = Random.Range(0, spawnPoints.Length);
+            // Select a random pickup to spawn
+            int pickupIndex = Random.Range(0, pickups.Length);
+
             // Check the spawn is not currently in use
             if (!inUseSpawns.Contains(spawnPointIndex))
             {
-                GameObject pickupInstance;
-                pickupInstance = Instantiate(pickup, spawnPoints[spawnPointIndex].position, pickup.transform.rotation) as GameObject;
+                // Instantiate a pickup and return a copy of it
+                GameObject pickupInstance = Instantiate(pickups[pickupIndex], spawnPoints[spawnPointIndex].position, pickups[pickupIndex].transform.rotation) as GameObject;
                 // Add the index to the in-use list
                 inUseSpawns.Add(spawnPointIndex);
                 // Give the index to the pickup object
