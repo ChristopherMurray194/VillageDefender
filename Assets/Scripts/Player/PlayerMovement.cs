@@ -3,9 +3,18 @@ using System.Collections;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public float speed = 6f;    // Speed of movement
-    public float rotSpeed = 4f; // Speed of Slerp
+    public float initialSpeed = 6f;     // initialSpeed of movement
+    public float rotSpeed = 4f;         // Speed of Slerp
+    
+    float startTime;            // Timer variable for any alterations to speed
 
+    float speed;                // Player's movement speed
+    public float Speed
+    {
+        get { return speed; }
+    }
+
+    int effectDuration = 0;     // The duration any alteration to the player's movmement will last
     Vector3 movement;           // Store the movement direction
     Animator anim;              // Reference to animator component
     Rigidbody playerRigidBody;  // Reference to rigid body component
@@ -17,6 +26,15 @@ public class PlayerMovement : MonoBehaviour
         floorMask = LayerMask.GetMask("Floor"); // Get the mask from the Floor layer
         anim = GetComponent<Animator>();
         playerRigidBody = GetComponent<Rigidbody>();
+    }
+
+    void Update()
+    {
+        // If the speed has changed
+        if (speed != initialSpeed)
+            // After the effect duration has elapsed
+            if ((Time.realtimeSinceStartup - startTime) > effectDuration)
+                ResetMovementSpeed();
     }
 
     void FixedUpdate()
@@ -75,5 +93,36 @@ public class PlayerMovement : MonoBehaviour
         bool running = h != 0f || v != 0f;
         // Set the 'IsRunning' boolean in the animator
         anim.SetBool("IsRunning", running);
+    }
+
+    /// <summary> 
+    /// Mutator function for speed 
+    /// </summary>
+    ///<param name="newSpeed"> the new player movement speed </param>
+    ///<param name="duration"> the duration the new speed effect should last. Default is 0 </param>
+    public void SetSpeed(float newSpeed, int duration = 0)
+    {
+        speed = newSpeed;
+
+        // If a new duration value has been passed
+        if (duration != 0)
+        {
+            // Set the duration the new speed lasts
+            effectDuration = duration;
+            // Start the effect timer by getting the current time
+            startTime = Time.realtimeSinceStartup;
+        }
+    }
+
+     /// <summary>
+     /// If the movment speed gets altered, this function is called
+     /// to reset it back to its initial value.
+     /// </summary>
+    void ResetMovementSpeed()
+    {
+        // Reset necessary variables
+        speed = initialSpeed;
+        startTime = 0f;
+        effectDuration = 0;
     }
 }
