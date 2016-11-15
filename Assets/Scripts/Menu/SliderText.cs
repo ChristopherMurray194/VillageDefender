@@ -6,6 +6,7 @@ public class SliderText : MonoBehaviour
 {
     Text text;
     Slider slider;
+    /// <summary> percentage of the slider that is filled </summary>
     float percentage = 0f;
 
     void Awake()

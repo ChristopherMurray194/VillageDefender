@@ -6,11 +6,15 @@ public class ImageSlideshow : MonoBehaviour
 {
     public CtrlInfObject[] CtrlInf;
 
-    GameObject labelFrame;          // This game object has the Control title Text component as a child
-    Text controlTitle;              // The text component, which is the title for the input binding
-    GameObject displayedImage;      // The image shown to desmonstrate the control's functionality
+    /// <summary> This game object has the Control title Text component as a child </summary>
+    GameObject labelFrame;
+    /// <summary> The text component, which is the title for the input binding </summary>
+    Text controlTitle;
+    /// <summary> The image shown to desmonstrate the control's functionality </summary>
+    GameObject displayedImage;
 
-    int index = 0;                  // Current index pointed to of the array 'CtrlInf'
+    /// <summary> Current index pointed to of the array 'CtrlInf' </summary>
+    int index = 0;
     public int Index
     {
         get { return index; }
@@ -27,9 +31,9 @@ public class ImageSlideshow : MonoBehaviour
         displayedImage.GetComponentInChildren<Image>().sprite = CtrlInf[index].image;   // Change the image
     }
 
-    /**
-     * Display the set of information for the next user input binding
-     */
+    /// <summary>
+    /// Display the set of information for the next user input binding.
+    /// </summary>
     public void NextBinding()
     {
         // If we are currently displaying the last element of 'CtrlInf'
@@ -43,9 +47,9 @@ public class ImageSlideshow : MonoBehaviour
         displayedImage.GetComponentInChildren<Image>().sprite = CtrlInf[index].image;
     }
 
-    /**
-     * Display the set of information for the previous user input binding
-     */
+    /// <summary>
+    /// Display the set of information for the previous user input binding.
+    /// </summary>
     public void PrevBinding()
     {
         // If we are currently displaying the first element of 'CtrlInf'

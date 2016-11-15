@@ -3,14 +3,20 @@ using System.Collections;
 
 public class EnemyManager : MonoBehaviour
 {
-    public int enemyCount = 5;          // Number of enemies to be spawned in this scene
+    /// <summary> Number of enemies to be spawned in the scene </summary>
+    public int enemyCount = 5;
     public PlayerHealth playerHealth;
+    /// <summary> Array of enemy GameObjects that can be spawned in this scene </summary>
     public GameObject[] enemies;
-    public float baseSpawnTime = 3f;    // Spawn time for the base enemy type
-    public float runnerSpawnTime = 10f;  // Spawn time for the runner enemy type
-    public Transform[] spawnPoints;     // Array of spawn points
+    /// <summary> Spawn time for the base enemy type </summary>
+    public float baseSpawnTime = 3f;
+    /// <summary>Spawn time for the runner enemy type </summary>
+    public float runnerSpawnTime = 10f;
+    /// <summary> Array of spawn points </summary>
+    public Transform[] spawnPoints;
 
-    int spawnCount; // Counts the number of enemies spawned
+    /// <summary> Counts the number of enemies spawned </summary>
+    int spawnCount;
 
     void Start()
     {
@@ -19,6 +25,9 @@ public class EnemyManager : MonoBehaviour
         InvokeRepeating("SpawnRunner", runnerSpawnTime, runnerSpawnTime);
     }
 
+    /// <summary>
+    /// Initialises a Skeleton GameObject, the BaseEnemy type.
+    /// </summary>
     void SpawnBaseEnemy()
     {
         // If the enemyCount has not been reached
@@ -38,6 +47,9 @@ public class EnemyManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Initialises a SkeletonRunner GameObject, the runner enemy type.
+    /// </summary>
     void SpawnRunner()
     {
         // If the enemyCount has not been reached

@@ -3,11 +3,11 @@ using System.Collections;
 
 public class Sewer : MonoBehaviour
 {
-    // Damage dealt to the player
+    /// <summary> Damage dealt to the player </summary>
     public int playerDamage = 5;
-    // Damage dealt to the enemies
+    /// <summary> Damage dealt to the enemies </summary>
     public int enemyDamage = 10;
-    // Damage dealt increment (in seconds)
+    /// <summary> Deal damage to the in range object every X seconds. </summary>
     public float damageTime = 3f;
 
     float timer;

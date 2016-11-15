@@ -7,6 +7,7 @@ public class SelectOnInput : MonoBehaviour
     public EventSystem eventSystem;
     public GameObject selectedObject;
 
+    /// <summary> Is this button currently selected? </summary>
     bool buttonSelected;
 
     void Update()

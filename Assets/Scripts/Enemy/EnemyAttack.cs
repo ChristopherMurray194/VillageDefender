@@ -11,7 +11,8 @@ public class EnemyAttack : MonoBehaviour
     PlayerHealth playerHealth;  // Reference to PlayerHealth script
     EnemyMovement enemyMovement;
     EnemyHealth enemyHealth;
-    bool bInRange;              // EnemyAC trigger
+    /// <summary> Value to assign to the EnemyAC parameter with the same identifier </summary>
+    bool bInRange;
     float timer;
 
     void Awake()
@@ -58,6 +59,9 @@ public class EnemyAttack : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Handles attacking the player
+    /// </summary>
     void Attack()
     {
         // Reset the timer
@@ -71,9 +75,9 @@ public class EnemyAttack : MonoBehaviour
         }
     }
 
-    /**
-     * This function will be called when the AttackFinished Event occurs on the Attack animation.
-     */
+    /// <summary>
+    /// This function will be called when the AttackFinished Event occurs on the enemy's Attack animation.
+    /// </summary>
     public void AttackFinished()
     {
         /* Apply damage ONLY when the enemy's sword hits the player.

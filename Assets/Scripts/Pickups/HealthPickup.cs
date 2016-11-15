@@ -3,7 +3,7 @@ using System.Collections;
 
 public class HealthPickup : BasePickup
 {
-    // Amount to restore player's health by
+    /// <summary> Amount to restore player's health by </summary>
     public int restoreAmount = 10;
     
     protected override void OnTriggerEnter(Collider other)

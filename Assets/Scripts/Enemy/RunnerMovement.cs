@@ -4,10 +4,13 @@ using System.Collections;
 public class RunnerMovement : EnemyMovement
 {
     public float runSpeed = 4f;
-    public float runDistance = 8f;  // The distance from the player the runner will start running
+    /// <summary> The distance from the player the runner will  begin running. </summary>
+    public float runDistance = 8f;
 
+    /// <summary> The ray cast from the enemy to detect when the player is close enough to run. </summary>
     Ray feeler;
     Animator anim;
+    /// <summary> The value to assign to the RunnerAC parameter with the same identifier. </summary>
     bool bCastRay = true;
 
     protected override void Awake()
@@ -31,11 +34,12 @@ public class RunnerMovement : EnemyMovement
         }
     }
 
-    /**
-     * Creates a 'feeler' raycast from the runner enemy to detect when the player is close
-     * enough to run at them. Cannot use a sphere collider as there is a sphere collider component
-     * acting as a trigger placed on the enemy object.
-     */
+    /// <summary>
+    /// Creates a 'feeler' raycast from the runner enemy to detect when the player is close
+    /// enough to run at them.Cannot use a sphere collider as there is a sphere collider component
+    /// acting as a trigger placed on the enemy object.
+    /// </summary>
+    /// <param name="rayDirection"> The direction for the raycast. </param>
     void CreateFeeler(Vector3 rayDirection)
     {
         float rayLength = runDistance;
@@ -56,17 +60,17 @@ public class RunnerMovement : EnemyMovement
         }
     }
 
-    /**
-     * Function called at the beginning of the SKILL animation playback
-     */
+    /// <summary>
+    /// Function called at the beginning of the SKILL animation playback.
+    /// </summary>
     void StopMovement()
     {
         nav.enabled = false;   
     }
 
-    /**
-     * Function called at the beginning of the SKILL animation playback
-     */
+    /// <summary>
+    /// Function called at the end of the SKILL animation playback.
+    /// </summary>
     void RestartMovement()
     {
         nav.enabled = true;

@@ -4,6 +4,7 @@ using System.Collections;
 
 public class ScoreManager : MonoBehaviour
 {
+    /// <summary> The persistant score for the scene </summary>
     public static int score;
     Text text;
 

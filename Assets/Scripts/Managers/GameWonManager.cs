@@ -4,6 +4,7 @@ using System.Collections;
 
 public class GameWonManager : MonoBehaviour
 {
+    /// <summary> Time (in seconds) before the game restarts </summary>
     public float restartDelay = 5f;
 
     Animator anim;

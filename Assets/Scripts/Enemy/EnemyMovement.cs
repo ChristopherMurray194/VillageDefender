@@ -5,7 +5,8 @@ public class EnemyMovement : MonoBehaviour
 {
     public float movementSpeed = 1f;
     
-    protected Transform player;         // Position of the player
+    /// <summary> The transform of the player object </summary>
+    protected Transform player;
     PlayerHealth playerHealth;
     EnemyHealth enemyHealth;
     protected NavMeshAgent nav;         // Reference to the NavMeshAgent

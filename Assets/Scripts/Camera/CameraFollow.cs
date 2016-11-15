@@ -3,10 +3,12 @@ using System.Collections;
 
 public class CameraFollow : MonoBehaviour
 {
-    public Transform target;        // Follow target (Player)
-    public float smoothing = 5f;    // Smoothness of follow movement
-
-    Vector3 offset;                 // Distance from player
+    /// <summary> Target's position for the camera to follow </summary>
+    public Transform target;
+    /// <summary> Lerp smoothness from camera pos to target pos </summary>
+    public float smoothing = 5f;
+    /// <summary> Distance the camera is from the player </summary>
+    Vector3 offset;
 
     void Start()
     {

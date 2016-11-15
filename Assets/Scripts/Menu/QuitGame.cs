@@ -3,6 +3,9 @@ using System.Collections;
 
 public class QuitGame : MonoBehaviour
 {
+    /// <summary>
+    /// Quits the game.
+    /// </summary>
     public void Quit()
     {
         // If the game is running in the editor

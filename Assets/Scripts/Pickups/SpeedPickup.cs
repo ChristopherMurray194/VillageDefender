@@ -3,9 +3,9 @@ using System.Collections;
 
 public class SpeedPickup : BasePickup
 {
-    // The new movement speed
+    /// <summary> The new movement speed </summary>
     public float newSpeed = 10f;
-    // The duration time (in seconds) for the effect of the pickup
+    /// <summary> The duration time (in seconds) for the effect of the pickup </summary>
     public int effectDuration = 5;
     
     protected override void OnTriggerEnter(Collider other)

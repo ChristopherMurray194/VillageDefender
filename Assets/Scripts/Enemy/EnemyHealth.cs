@@ -5,7 +5,9 @@ public class EnemyHealth : MonoBehaviour
 {
     public int startingHealth = 100;
     public int currentHealth;
+    /// <summary> The speed the enemy object sinks when killed </summary>
     public float sinkSpeed = 1f;
+    /// <summary> The score value this enemy type is worth </summary>
     public int scoreValue = 10;
     public AudioClip deathClip;
 
@@ -15,7 +17,9 @@ public class EnemyHealth : MonoBehaviour
     ParticleSystem bloodParticles;
     Blood bloodScript;
     CapsuleCollider capsuleCollider;
+    /// <summary> Value to assign to the EnemyAC parameter with the same identifier </summary>
     bool isDead;
+    /// <summary> Value to assign to the EnemyAC parameter with the same identifier </summary>
     bool isSinking;
 
     void Awake()
@@ -37,6 +41,10 @@ public class EnemyHealth : MonoBehaviour
             transform.Translate(-Vector3.up * sinkSpeed * Time.deltaTime);
     }
 
+    /// <summary>
+    /// Deals damage to the enemy.
+    /// </summary>
+    /// <param name="amount"> The amound of damage to deal. </param>
     public void TakeDamage(int amount)
     {
         if (isDead)
@@ -51,13 +59,16 @@ public class EnemyHealth : MonoBehaviour
         anim.SetBool("bDamageTaken", true);
 
         // Play the blood particle spurt effect
-        bloodScript.SetSpurt(true);
+        bloodScript.Spurt();
         bloodParticles.Play();
 
         if (currentHealth <= 0)
             Death();
     }
 
+    /// <summary>
+    /// Handles what should happen when the enemy has no health remianing.
+    /// </summary>
     void Death()
     {
         isDead = true;
@@ -71,10 +82,13 @@ public class EnemyHealth : MonoBehaviour
         enemyAudio.Play();
 
         // Play the blood particle spray effect
-        bloodScript.SetSpray(true);
+        bloodScript.Spray();
         bloodParticles.Play();
     }
 
+    /// <summary>
+    /// Start the sinking process of the enemy object.
+    /// </summary>
     public void StartSinking()
     {
         // Disable the nav agent so that the enemy stops path finding
@@ -89,6 +103,9 @@ public class EnemyHealth : MonoBehaviour
         Destroy(gameObject, 2f);
     }
 
+    /// <summary>
+    /// Resets the bDamageTaken EnemyAC parameter to false. So that it can be played again.
+    /// </summary>
     public void ResetDamageTaken()
     {
         // Reset the bDamageTaken EnemyAC parameter at the end of the damage animation

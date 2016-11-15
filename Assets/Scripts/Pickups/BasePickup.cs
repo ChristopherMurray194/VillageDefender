@@ -3,7 +3,12 @@ using System.Collections;
 
 public abstract class BasePickup : MonoBehaviour
 {
-    protected int spawnIndex = 5; // The index of the spawn this pickup is currently position at
+    /// <summary> 
+    /// The index of the spawn this pickup is currently positioned at.
+    /// </summary>
+    // Default of -1 in the event that the variable is not assigned a new value for whatever reason, 
+    // the pickup manager can't remove a spawn index from the inUse array incorrectly.
+    protected int spawnIndex = -1;
     public int SpawnIndex
     {
         get
@@ -31,10 +36,10 @@ public abstract class BasePickup : MonoBehaviour
         transform.Rotate(new Vector3(0f, 90f, 0f) * Time.deltaTime, Space.World);
     }
 
-    /*
-     * Ensure all derived classes (pickup types) notifies their respective manager,
-     * to free up their spawn point and decrement the number of pickups (of that type) in the scene.
-     */
+    /// <summary>
+    /// Notify the manager to free up the spawn point this pickup has been spawned at 
+    /// and decrement the number of pickups in the scene.
+    /// </summary>
     protected void NotifyManager()
     {
         GameObject pickupMgr = GameObject.Find("PickupManager");

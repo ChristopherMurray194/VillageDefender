@@ -3,23 +3,30 @@ using System.Collections;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public float initialSpeed = 6f;     // initialSpeed of movement
-    public float rotSpeed = 4f;         // Speed of Slerp
-    
-    float startTime;            // Timer variable for any alterations to speed
+    /// <summary> initialSpeed of movement </summary>
+    public float initialSpeed = 6f;
+    /// <summary> Speed of Slerp to be applied to the player object's rotation </summary>
+    public float rotSpeed = 4f;
 
-    float speed;                // Player's movement speed
+    /// <summary> Timer variable for any alterations to speed </summary>
+    float startTime;
+
+    /// <summary> Player's current movement speed </summary>
+    float speed;
     public float Speed
     {
         get { return speed; }
     }
 
-    int effectDuration = 0;     // The duration any alteration to the player's movmement will last
-    Vector3 movement;           // Store the movement direction
-    Animator anim;              // Reference to animator component
-    Rigidbody playerRigidBody;  // Reference to rigid body component
-    int floorMask;              // Reference to the floor mask quad
-    float camRayLength = 100f;  // Length of the ray cast from the camera
+    /// <summary> The duration any alteration to the player's movmement will last </summary>
+    int effectDuration = 0;
+    /// <summary> Store the movement direction </summary>
+    Vector3 movement;
+    Animator anim;
+    Rigidbody playerRigidBody;
+    int floorMask;
+    /// <summary> Length of the ray cast from the camera </summary>
+    float camRayLength = 100f;
 
     void Awake()
     {
@@ -40,6 +47,8 @@ public class PlayerMovement : MonoBehaviour
     void FixedUpdate()
     {
         // Get Inputs
+        // Raw axis returns the value of the virtual axis identified by axisName
+        // The value will be in the range -1...1. For keyboard input this will either be -1, 0, 1
         float h = Input.GetAxisRaw("Horizontal");   // Maps to A and D keys
         float v = Input.GetAxisRaw("Vertical");     // Maps to the W and S keys
 
@@ -48,6 +57,11 @@ public class PlayerMovement : MonoBehaviour
         Animating(h, v);
     }
 
+    /// <summary>
+    /// Handles the player's movement.
+    /// </summary>
+    /// <param name="h"> Horizontal virtual axis value. In the range of -1...1 </param>
+    /// <param name="v"> Vertical virtual axis value. In the range of -1...1 </param>
     void Move(float h, float v)
     {
         movement.Set(h, 0f, v);
@@ -57,6 +71,12 @@ public class PlayerMovement : MonoBehaviour
         playerRigidBody.MovePosition(transform.position + movement);
     }
 
+    /// <summary>
+    /// Turn the player. The input which drives the turning is determined by whether or not the player is currently moving.
+    /// If they are not then the mouse position determines the direction the player rotates towards. Otherwise KeyEvents do.
+    /// </summary>
+    /// <param name="h"> Horizontal virtual axis value. In the range of -1...1 </param>
+    /// <param name="v"> Vertical virtual axis value. In the range of -1...1 </param>
     void Turning(float h, float v)
     {
         // If there is no horizontal OR vertical axis input - i.e. not moving
@@ -87,6 +107,11 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Handles the animation to be played determined by how the player is moving.
+    /// </summary>
+    /// <param name="h"> Horizontal virtual axis value. In the range of -1...1 </param>
+    /// <param name="v"> Vertical virtual axis value. In the range of -1...1 </param>
     void Animating(float h, float v)
     {
         // running is true if there is input - h OR v are NOT 0

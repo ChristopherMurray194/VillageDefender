@@ -3,14 +3,15 @@ using System.Collections;
 
 public class PlayerAttack : MonoBehaviour
 {
+    /// <summary> Amount of damage the player deals to enemies </summary>
     public int attackDamage = 25;
-    public float throwRange = 10f;
 
     Animator anim;
     Ray fwdRay;
     RaycastHit objectHit;
     int damageableMask;
     EnemyHealth enemyHealth;
+    /// <summary> Value to be assigned to the PlayerAC parameter with the same identifier </summary>
     bool bEnemyInRange;
 
     void Awake()
@@ -49,10 +50,10 @@ public class PlayerAttack : MonoBehaviour
         GetFacing();
     }
 
-    /**
-     * Cast a ray from the player's forward direction and get the health script of the enemy
-     * the player is facing
-     */
+    /// <summary>
+    /// Cast a ray from the player's forward direction and get the health script of the enemy
+    /// the player is facing.
+    /// </summary>
     void GetFacing()
     {
         fwdRay.origin = transform.position + new Vector3(0f,.5f, 0f);     // The ray begins at the player's position
@@ -68,6 +69,9 @@ public class PlayerAttack : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Invoked when the player's attack animation event (with the same identifier) is reached in the animation playback.
+    /// </summary>
     public void AttackFinished()
     {
         // Only apply damage to the enemy if the enemy is in range of the attack
@@ -79,6 +83,9 @@ public class PlayerAttack : MonoBehaviour
         anim.SetBool("Attack", false);
     }
 
+    /// <summary>
+    /// Cancels the attack animation playback if the player begins moving.
+    /// </summary>
     void SetAttackOnMovement()
     {
         float h = Input.GetAxisRaw("Horizontal");

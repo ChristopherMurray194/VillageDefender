@@ -4,19 +4,24 @@ using System.Collections;
 
 public class PlayerHealth : MonoBehaviour
 {
+    /// <summary> Inital health value for the player </summary>
     public int startingHealth = 100;
     public Slider healthSlider;
     public Image damageImage;
     public AudioClip deathClip;
+    /// <summary> Time the damage taken image is flashed on the UI for. Will be multiplied by deltaTime </summary>
     public float flashSpeed = 5f;
+    /// <summary> Colour of the damage taken UI image </summary>
     public Color flashColour = new Color(1f, 0f, 0f, 0.1f);
 
+    /// <summary> Current health of the player </summary>
     int currentHealth;
     Animator anim;
     AudioSource playerAudio;
     PlayerMovement playerMovement;  // Reference to PlayerMovement script
-    //PlayerAttaching playerAttacking;
+    /// <summary> The value to be assigned to the playerAC parameter with the same identifier </summary>
     bool isDead;
+    /// <summary> The value to be assigned to the playerAC parameter with the same identifier </summary>
     bool damaged;
     
     void Awake()
@@ -24,7 +29,6 @@ public class PlayerHealth : MonoBehaviour
         anim = GetComponent<Animator>();
         playerAudio = GetComponent<AudioSource>();
         playerMovement = GetComponent<PlayerMovement>();
-        //playerAttacking = GetComponentInChildren<PlayerAttacking>(); // THIS WILL LIKELY NEED TO BE CHANGED AS PLAYER CAN HANDLE WHEN ATTACKING NOT THE SWORD
         currentHealth = startingHealth;
     }
 
@@ -41,6 +45,10 @@ public class PlayerHealth : MonoBehaviour
         damaged = false;
     }
 
+    /// <summary>
+    /// Deals damage to the player.
+    /// </summary>
+    /// <param name="amount"> Amount of damage to be dealt </param>
     public void TakeDamage(int amount)
     {
         // If the player is not blocking, they can take damage
@@ -60,6 +68,10 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Restores health to the player.
+    /// </summary>
+    /// <param name="amount"> Amount of health to restore </param>
     public void RestoreHealth(int amount)
     {
         // Ensure when health is restored it is not greater than,
@@ -79,6 +91,9 @@ public class PlayerHealth : MonoBehaviour
         //       above particle effect. Latter would be better.
     }
 
+    /// <summary>
+    /// Handles what should happen when the player has no health remaining.
+    /// </summary>
     void Death()
     {
         isDead = true;

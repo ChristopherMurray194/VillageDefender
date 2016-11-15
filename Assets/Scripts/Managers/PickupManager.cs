@@ -3,13 +3,19 @@ using System.Collections;
 
 public class PickupManager : MonoBehaviour
 {
-    public GameObject[] pickups;        // Pickup objects
-    public int pickupCap = 1;           // Maximum number of pickups in the scene
-    public float pickupSpawnTime = 10f; // Time between spawns
+    /// <summary> Array of pickup GameObjects </summary>
+    public GameObject[] pickups;
+    /// <summary> Maximum number of pickups in the scene </summary>
+    public int pickupCap = 2;
+    /// <summary> Time  (in secodns) between spawns </summary>
+    public float pickupSpawnTime = 10f;
+    /// <summary> Array of spawnpoint GameObject transforms </summary>
     public Transform[] spawnPoints;
 
-    int pickupCount;                          // Keep track of how many pickups are currently in the scene
-    ArrayList inUseSpawns = new ArrayList();  // List of spawns with a pickup spawned
+    /// <summary> Keeps track of how many pickups are currently in the scene </summary>
+    int pickupCount;
+    /// <summary> List of spawns with a pickup spawned </summary>
+    ArrayList inUseSpawns = new ArrayList();
 
     void Start()
     {
@@ -17,6 +23,10 @@ public class PickupManager : MonoBehaviour
         InvokeRepeating("SpawnPickup", pickupSpawnTime, pickupSpawnTime);
     }
 
+    /// <summary>
+    /// Called when a spawn point is freed, by a pickup at that spawn point being destroyed.
+    /// </summary>
+    /// <param name="index"> The index of the spawn point that has been assigned to the destroyed pickup </param>
     public void FreeSpawn(int index)
     {
         if (inUseSpawns.Contains(index))
@@ -24,6 +34,9 @@ public class PickupManager : MonoBehaviour
             inUseSpawns.Remove(index);
     }
 
+    /// <summary>
+    /// Instantiate a pickup GameObject randomly chosen from the pickups array.
+    /// </summary>
     void SpawnPickup()
     {
         // Prevent stack overflow. If all the spawn points are in use...

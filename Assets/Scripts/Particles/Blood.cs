@@ -3,8 +3,11 @@ using System.Collections;
 
 public class Blood : MonoBehaviour
 {
-    // Determines whether to spurt or spray blood, default is to spurt
-    bool bSpurt = true, bSpray;
+    /// <summary> If true. When damage is taken, spurt animation will play. </summary>
+    bool bSpurt = true;
+    /// <summary> If true. When damage is taken, spray animation will play. </summary>
+    bool bSpray = false;
+
     ParticleSystem bloodParticles;
 
     void  Awake()
@@ -13,37 +16,27 @@ public class Blood : MonoBehaviour
         bloodParticles.startSize = 0.3f;
         bloodParticles.startSpeed = 4f;
 
-        // Ensure default is spurt
+        // Ensure default is to spurt blood
         Spurt();
     }
     
-    void Update()
+    /// <summary>
+    /// Invoke to play the spurt animation when damage is taken.
+    /// </summary>
+    public void Spurt()
     {
-        if (bSpray)
-            Spray();
-        if (bSpurt)
-            Spurt();
-    }
-    
-    void Spurt()
-    {
+        bSpurt = true;
         bSpray = false;
         bloodParticles.loop = false;
     }
 
-    void Spray()
+    /// <summary>
+    /// Invoke to play the spray animation when damage is taken.
+    /// </summary>
+    public void Spray()
     {
+        bSpray = true;
         bSpurt = false;
         bloodParticles.loop = true;
-    }
-
-    public void SetSpurt(bool b)
-    {
-        bSpurt = b;
-    }
-
-    public void SetSpray(bool b)
-    {
-        bSpray = b;
     }
 }
