@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class SpeedPickup : BasePickup
@@ -18,6 +19,10 @@ public class SpeedPickup : BasePickup
             {
                 // Assign the new speed to the player's movement speed and pass the effect duration
                 playerMovement.SetSpeed(newSpeed, effectDuration);
+
+                GameObject SpeedPwrUpUI = GameObject.Find("PupSpeedUI");
+                SpeedImageManager speedImgMgr = SpeedPwrUpUI.GetComponent<SpeedImageManager>();
+                speedImgMgr.HighlightImage(effectDuration);
 
                 NotifyManager();
 
