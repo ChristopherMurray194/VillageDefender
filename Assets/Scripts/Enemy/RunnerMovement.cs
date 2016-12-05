@@ -7,8 +7,6 @@ public class RunnerMovement : EnemyMovement
     /// <summary> The distance from the player the runner will  begin running. </summary>
     public float runDistance = 8f;
 
-    /// <summary> The ray cast from the enemy to detect when the player is close enough to run. </summary>
-    Ray feeler;
     Animator anim;
     /// <summary> The value to assign to the RunnerAC parameter with the same identifier. </summary>
     bool bCastRay = true;
@@ -26,11 +24,9 @@ public class RunnerMovement : EnemyMovement
         if (bCastRay)
         {
             // Create three feelers
-            // TODO: These vector directions aren't quite right,
-            //       to check uncomment Debug.DrawRay in the function.
-            CreateFeeler(transform.forward + new Vector3(-.5f, 0f, 0f));
+            CreateFeeler(transform.forward + transform.right);
             CreateFeeler(transform.forward);
-            CreateFeeler(transform.forward + new Vector3(.5f, 0f, 0f));
+            CreateFeeler(transform.forward + -transform.right);
         }
     }
 
@@ -42,14 +38,14 @@ public class RunnerMovement : EnemyMovement
     /// <param name="rayDirection"> The direction for the raycast. </param>
     void CreateFeeler(Vector3 rayDirection)
     {
-        float rayLength = runDistance;
+        //The ray cast from the enemy to detect when the player is close enough to run.
+        Ray feeler = new Ray(transform.position, rayDirection);
         RaycastHit objectHit;
-        feeler.origin = transform.position;
-        feeler.direction = rayDirection;
 
-        //Debug.DrawRay(feeler.origin + new Vector3(0f, 1f, 0f), feeler.direction * rayLength, Color.red, .1f);
+        //Debug.DrawRay(feeler.origin + new Vector3(0f, 1f, 0f), feeler.direction * runDistance, Color.red, .1f);
 
-        if(Physics.Raycast(feeler, out objectHit, rayLength, LayerMask.GetMask("Player")))
+        // If the ray collides with the player
+        if(Physics.Raycast(feeler, out objectHit, runDistance, LayerMask.GetMask("Player")))
         {
                 // Start running animation
                 anim.SetBool("bRun", true);
