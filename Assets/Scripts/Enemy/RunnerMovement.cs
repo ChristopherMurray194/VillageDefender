@@ -10,6 +10,7 @@ public class RunnerMovement : EnemyMovement
     Animator anim;
     /// <summary> The value to assign to the RunnerAC parameter with the same identifier. </summary>
     bool bCastRay = true;
+    const float THETA = 90f;
 
     protected override void Awake()
     {
@@ -23,10 +24,25 @@ public class RunnerMovement : EnemyMovement
 
         if (bCastRay)
         {
+            Vector3 fwd = transform.forward;
+            // Left feeler
+            Vector3 redFeeler = new Vector3((fwd.x * Mathf.Cos(THETA)) + (fwd.z * Mathf.Sin(THETA)),
+                                    transform.forward.y,
+                                    (fwd.x * -Mathf.Sin(THETA)) + (fwd.z * Mathf.Cos(THETA)));
             // Create three feelers
-            CreateFeeler(transform.forward + transform.right);
+            CreateFeeler(redFeeler);
+            Debug.DrawRay(transform.position + new Vector3(0f, 1f, 0f), redFeeler * runDistance, Color.red, .1f);
+            Debug.Log(Vector3.Dot(transform.forward, redFeeler) * (180/Mathf.PI));
+
             CreateFeeler(transform.forward);
-            CreateFeeler(transform.forward + -transform.right);
+            Debug.DrawRay(transform.position + new Vector3(0f, 1f, 0f), transform.forward * runDistance, Color.blue, .1f);
+
+            // Right feeler
+            Vector3 greenFeeler = new Vector3((fwd.x * Mathf.Cos(-THETA)) + (fwd.z * Mathf.Sin(-THETA)),
+                                    transform.forward.y,
+                                    (fwd.x * -Mathf.Sin(-THETA)) + (fwd.z * Mathf.Cos(-THETA)));
+            CreateFeeler(greenFeeler);
+            Debug.DrawRay(transform.position + new Vector3(0f, 1f, 0f), greenFeeler * runDistance, Color.green, .1f);
         }
     }
 
@@ -39,7 +55,7 @@ public class RunnerMovement : EnemyMovement
     void CreateFeeler(Vector3 rayDirection)
     {
         //The ray cast from the enemy to detect when the player is close enough to run.
-        Ray feeler = new Ray(transform.position, rayDirection);
+        Ray feeler = new Ray(transform.position, Vector3.ClampMagnitude(rayDirection, runDistance));
         RaycastHit objectHit;
 
         //Debug.DrawRay(feeler.origin + new Vector3(0f, 1f, 0f), feeler.direction * runDistance, Color.red, .1f);
