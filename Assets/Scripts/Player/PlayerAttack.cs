@@ -7,17 +7,22 @@ public class PlayerAttack : MonoBehaviour
     public int attackDamage = 25;
 
     Animator anim;
-    Ray fwdRay;
     RaycastHit objectHit;
     int damageableMask;
     EnemyHealth enemyHealth;
     /// <summary> Value to be assigned to the PlayerAC parameter with the same identifier </summary>
     bool bEnemyInRange;
+    /// <summary> The transform representing the origin of the ray used to detect the enemy the player is facing </summary>
+    Transform swordTransform;
 
     void Awake()
     {
         damageableMask = LayerMask.GetMask("Damageable");
         anim = GetComponent<Animator>();
+
+        Transform footman = transform.Find("footman");
+        Transform hips = footman.Find("Hips");
+        swordTransform = hips.Find("Sword");
     }
 
     // Called almost every frame
@@ -47,17 +52,21 @@ public class PlayerAttack : MonoBehaviour
         if (Input.GetButtonUp("Fire2")) anim.SetBool("Block", false);
 
         SetAttackOnMovement();
-        GetFacing();
+        GetFacing(transform.forward);
+        // Also create a ray diagonally to the left, in case the enemy is to the left of the sword arm.
+        // In which case they won't be detected by the ray.
+        GetFacing(transform.forward + -transform.right);
     }
 
     /// <summary>
-    /// Cast a ray from the player's forward direction and get the health script of the enemy
+    /// Cast a ray from the sword's transform forward direction and get the health script of the enemy
     /// the player is facing.
+    /// <param name="direction"> Direction of the created ray </param>
     /// </summary>
-    void GetFacing()
+    void GetFacing(Vector3 direction)
     {
-        fwdRay.origin = transform.position + new Vector3(0f,.5f, 0f);     // The ray begins at the player's position
-        fwdRay.direction = transform.forward;   // Ray is in the direction the player is facing
+        Ray fwdRay = new Ray(swordTransform.position,   // The ray begins at the  sword transform's position
+                            direction);                 // Ray is in the direction the player is facing
 
         // The length of the ray is the same as the radius of the player's spherecollider + its z offset.
         // Unnecessary to have it any longer as we do not care about objects outside of the player's range.
