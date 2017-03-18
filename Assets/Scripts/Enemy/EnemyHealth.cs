@@ -92,7 +92,7 @@ public class EnemyHealth : MonoBehaviour
     public void StartSinking()
     {
         // Disable the nav agent so that the enemy stops path finding
-        GetComponent<NavMeshAgent>().enabled = false;
+        GetComponent<UnityEngine.AI.NavMeshAgent>().enabled = false;
         // Unity NavMesh ignores kinematic objects when updating
         GetComponent<Rigidbody>().isKinematic = true;
         isSinking = true;

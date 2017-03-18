@@ -9,7 +9,7 @@ public class EnemyMovement : MonoBehaviour
     protected Transform player;
     PlayerHealth playerHealth;
     EnemyHealth enemyHealth;
-    protected NavMeshAgent nav;         // Reference to the NavMeshAgent
+    protected UnityEngine.AI.NavMeshAgent nav;         // Reference to the NavMeshAgent
     
     protected virtual void Awake()
     {
@@ -17,7 +17,7 @@ public class EnemyMovement : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player").transform;
         playerHealth = player.GetComponent<PlayerHealth>();
         enemyHealth = GetComponent<EnemyHealth>();
-        nav = GetComponent<NavMeshAgent>();
+        nav = GetComponent<UnityEngine.AI.NavMeshAgent>();
         nav.speed = movementSpeed;
     }
 
